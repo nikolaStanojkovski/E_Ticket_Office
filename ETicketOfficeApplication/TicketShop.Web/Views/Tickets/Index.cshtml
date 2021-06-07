@@ -1,0 +1,110 @@
+﻿@model List<TicketShop.Domain.Domain.Ticket>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3 class="display-4 text-center mt-4 mb-2">Tickets</h3>
+<br />
+
+@if (ViewBag.Error != "None")
+{
+    <h4 class="text-center mb-4 text-danger">@ViewBag.Error</h4>
+}
+
+<div class="container">
+
+    @if (User.Identity.IsAuthenticated)
+    {
+        @if (User.IsInRole("Administrator"))
+        {
+            <div class="row">
+                <div class="col-6 h-100">
+                    <a class="btn btn-success btn-block text-center" asp-controller="Tickets" asp-action="Create">Add Ticket</a>
+                </div>
+                <div class="col-6 h-100">
+                    <form asp-controller="Tickets" asp-action="FilterByDate" method="get">
+                        <button type="submit" class="btn btn-outline-info btn-block">
+                            Filter by valid date
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <form asp-controller="Tickets" asp-action="ExportTickets" method="post">
+                <div class="row mt-3">
+                    <div class="col-6">
+                        <select class="form-control" id="genre" name="genre" asp-items="Html.GetEnumSelectList<TicketShop.Domain.Enumerations.Genre>()">
+                        </select>
+                    </div>
+                    <div class="col-6">
+                        <button type="submit" class="btn btn-info btn-block">
+                            Export Tickets
+                        </button>
+                    </div>
+                </div>
+            </form>
+        }
+        else
+        {
+            <div class="row">
+                <div class="col-12">
+                    <form asp-controller="Tickets" asp-action="FilterByDate" method="get">
+                        <button type="submit" class="btn btn-outline-info btn-block">
+                            Filter by valid date
+                        </button>
+                    </form>
+                </div>
+            </div>
+        }
+    }
+
+    <br />
+
+
+    @for (int i = 0; i < Model.Count; i++)
+    {
+        var item = Model[i];
+
+        if (i % 4 == 0)
+        {
+            @:<div class="row my-2">
+            }
+
+            <div class="col-3">
+                <div class="card my-3">
+
+                    <div class="card-body">
+                        <a asp-controller="Tickets" asp-action="Details" asp-route-id="@item.Id">
+                            <h4 class="card-title">@item.MovieName</h4>
+                            <h5 class="card-title">@item.Genre</h5> <br />
+                            <h5 class="card-title">@item.Date</h5>
+                            <p><i>Price: </i><b>@item.Price €</b></p>
+                        </a>
+                    </div>
+
+
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <div class="card-footer">
+                            <div class="row text-center">
+                                <a asp-controller="Tickets" style="width: 100%;" asp-action="AddTicketToCart" asp-route-id="@item.Id" class="btn btn-primary my-1">Add To Cart</a>
+                                @if (User.IsInRole("Administrator"))
+                                {
+                                    <a asp-controller="Tickets" style="width: 100%;" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-secondary my-1">Edit</a>
+                                    <a asp-controller="Tickets" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-block my-1">Delete</a>
+                                }
+
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+
+            if (i % 4 == 3)
+            {
+            @:</div>
+        }
+    }
+</div>

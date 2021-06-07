@@ -1,0 +1,15 @@
+﻿
+<h3 class="display-4 text-center my-4">Import Users</h3>
+<br />
+
+<form asp-controller="Account" asp-action="ImportUsers" method="post" enctype="multipart/form-data">
+
+    <div class="form-group text-center">
+        <input class="form-control d-block" accept=".xlsx" name="file" type="file" />
+    </div>
+
+    <div class="form-group mt-4">
+        <input type="submit" value="Import" class="btn btn-primary btn-block" />
+    </div>
+
+</form>

@@ -1,0 +1,11 @@
+C:\Users\Nick\Documents\GitHub\E_Ticket_Office\ETicketOfficeApplication\TicketShop.Domain\bin\Debug\net5.0\TicketShop.Domain.deps.json
+C:\Users\Nick\Documents\GitHub\E_Ticket_Office\ETicketOfficeApplication\TicketShop.Domain\bin\Debug\net5.0\TicketShop.Domain.dll
+C:\Users\Nick\Documents\GitHub\E_Ticket_Office\ETicketOfficeApplication\TicketShop.Domain\bin\Debug\net5.0\ref\TicketShop.Domain.dll
+C:\Users\Nick\Documents\GitHub\E_Ticket_Office\ETicketOfficeApplication\TicketShop.Domain\bin\Debug\net5.0\TicketShop.Domain.pdb
+C:\Users\Nick\Documents\GitHub\E_Ticket_Office\ETicketOfficeApplication\TicketShop.Domain\obj\Debug\net5.0\TicketShop.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Nick\Documents\GitHub\E_Ticket_Office\ETicketOfficeApplication\TicketShop.Domain\obj\Debug\net5.0\TicketShop.Domain.AssemblyInfoInputs.cache
+C:\Users\Nick\Documents\GitHub\E_Ticket_Office\ETicketOfficeApplication\TicketShop.Domain\obj\Debug\net5.0\TicketShop.Domain.AssemblyInfo.cs
+C:\Users\Nick\Documents\GitHub\E_Ticket_Office\ETicketOfficeApplication\TicketShop.Domain\obj\Debug\net5.0\TicketShop.Domain.csproj.CoreCompileInputs.cache
+C:\Users\Nick\Documents\GitHub\E_Ticket_Office\ETicketOfficeApplication\TicketShop.Domain\obj\Debug\net5.0\TicketShop.Domain.dll
+C:\Users\Nick\Documents\GitHub\E_Ticket_Office\ETicketOfficeApplication\TicketShop.Domain\obj\Debug\net5.0\ref\TicketShop.Domain.dll
+C:\Users\Nick\Documents\GitHub\E_Ticket_Office\ETicketOfficeApplication\TicketShop.Domain\obj\Debug\net5.0\TicketShop.Domain.pdb

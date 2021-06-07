@@ -1,0 +1,50 @@
+﻿@model TicketShop.Domain.DTO.AddToShoppingCartDto
+
+@{
+    ViewData["Title"] = "Add Tciket To Shopping Cart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Add Selected Ticket to User Shopping Cart:</h2>
+
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddTicketToCart" method="post">
+            <input type="hidden" asp-for="TicketId" />
+
+            <div class="form-group">
+                <label asp-for="Ticket.MovieName"></label>
+                <input disabled asp-for="Ticket.MovieName" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Ticket.Date"></label>
+                <input disabled asp-for="Ticket.Date" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Ticket.Genre"></label>
+                <input disabled asp-for="Ticket.Genre" class="form-control" />
+            </div>
+
+            <hr class="text-center text-info w-100 my-2"/>
+
+            <div class="form-group">
+                <label asp-for="Quantity"></label>
+                <input asp-for="Quantity" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label>Ticket Type</label>
+                <select class="form-control" asp-for="@Model.TicketType" asp-items="Html.GetEnumSelectList<TicketShop.Domain.Enumerations.TicketType>()">
+                </select>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>

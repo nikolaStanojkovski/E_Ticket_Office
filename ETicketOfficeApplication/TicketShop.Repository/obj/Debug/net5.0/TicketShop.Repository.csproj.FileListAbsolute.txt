@@ -1,0 +1,15 @@
+C:\Users\Nick\Documents\GitHub\E_Ticket_Office\ETicketOfficeApplication\TicketShop.Repository\bin\Debug\net5.0\TicketShop.Repository.deps.json
+C:\Users\Nick\Documents\GitHub\E_Ticket_Office\ETicketOfficeApplication\TicketShop.Repository\bin\Debug\net5.0\TicketShop.Repository.dll
+C:\Users\Nick\Documents\GitHub\E_Ticket_Office\ETicketOfficeApplication\TicketShop.Repository\bin\Debug\net5.0\ref\TicketShop.Repository.dll
+C:\Users\Nick\Documents\GitHub\E_Ticket_Office\ETicketOfficeApplication\TicketShop.Repository\bin\Debug\net5.0\TicketShop.Repository.pdb
+C:\Users\Nick\Documents\GitHub\E_Ticket_Office\ETicketOfficeApplication\TicketShop.Repository\bin\Debug\net5.0\TicketShop.Domain.dll
+C:\Users\Nick\Documents\GitHub\E_Ticket_Office\ETicketOfficeApplication\TicketShop.Repository\bin\Debug\net5.0\TicketShop.Domain.pdb
+C:\Users\Nick\Documents\GitHub\E_Ticket_Office\ETicketOfficeApplication\TicketShop.Repository\obj\Debug\net5.0\TicketShop.Repository.csprojAssemblyReference.cache
+C:\Users\Nick\Documents\GitHub\E_Ticket_Office\ETicketOfficeApplication\TicketShop.Repository\obj\Debug\net5.0\TicketShop.Repository.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Nick\Documents\GitHub\E_Ticket_Office\ETicketOfficeApplication\TicketShop.Repository\obj\Debug\net5.0\TicketShop.Repository.AssemblyInfoInputs.cache
+C:\Users\Nick\Documents\GitHub\E_Ticket_Office\ETicketOfficeApplication\TicketShop.Repository\obj\Debug\net5.0\TicketShop.Repository.AssemblyInfo.cs
+C:\Users\Nick\Documents\GitHub\E_Ticket_Office\ETicketOfficeApplication\TicketShop.Repository\obj\Debug\net5.0\TicketShop.Repository.csproj.CoreCompileInputs.cache
+C:\Users\Nick\Documents\GitHub\E_Ticket_Office\ETicketOfficeApplication\TicketShop.Repository\obj\Debug\net5.0\TicketShop.Repository.csproj.CopyComplete
+C:\Users\Nick\Documents\GitHub\E_Ticket_Office\ETicketOfficeApplication\TicketShop.Repository\obj\Debug\net5.0\TicketShop.Repository.dll
+C:\Users\Nick\Documents\GitHub\E_Ticket_Office\ETicketOfficeApplication\TicketShop.Repository\obj\Debug\net5.0\ref\TicketShop.Repository.dll
+C:\Users\Nick\Documents\GitHub\E_Ticket_Office\ETicketOfficeApplication\TicketShop.Repository\obj\Debug\net5.0\TicketShop.Repository.pdb

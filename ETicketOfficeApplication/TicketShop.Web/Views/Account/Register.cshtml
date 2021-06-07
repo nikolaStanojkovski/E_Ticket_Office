@@ -1,0 +1,96 @@
+﻿@model TicketShop.Domain.Identity.UserRegistrationDto
+@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+
+    @Html.ValidationSummary()
+    <form asp-action="Register" asp-controller="Account" method="post">
+        <div class="container">
+            <br />
+
+            <h1 class="text-center display-4">Resgister page</h1>
+            <br />
+            <br />
+
+            <div class="form-group col-12 mx-2">
+                <div>
+                    @Html.TextBoxFor(m => m.FirstName, new { placeholder = "First Name", @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.FirstName)
+                </div>
+            </div>
+
+            <div class="form-group col-12 mx-2">
+                <div>
+                    @Html.TextBoxFor(m => m.MiddleName, new { placeholder = "Middle Name", @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.MiddleName)
+                </div>
+            </div>
+
+            <div class="form-group col-12 mx-2">
+                <div>
+                    @Html.TextBoxFor(m => m.LastName, new { placeholder = "Last Name", @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.LastName)
+                </div>
+            </div>
+
+            <div class="form-group col-12 mx-2">
+                <div>
+                    @Html.TextBoxFor(m => m.Address, new { placeholder = "Address", @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Address)
+                </div>
+            </div>
+
+            <div class="form-group col-12 mx-2">
+                <div>
+                    @Html.TextBoxFor(m => m.Age, new { placeholder = "Age", @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Age)
+                </div>
+            </div>
+
+            <div class="form-group col-12 mx-2">
+                <div>
+                    <select class="form-control" asp-for="@Model.Gender" asp-items="Html.GetEnumSelectList<TicketShop.Domain.Enumerations.Gender>()">
+                    </select>
+                    @Html.ValidationMessageFor(m => m.Gender)
+                </div>
+            </div>
+
+            <hr class="text-center text-info w-50 my-5" style="height: 5px;" />
+
+            <div class="form-group col-12 mx-2">
+                <div>
+                    @Html.TextBoxFor(m => m.Email, new { placeholder = "Email", @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Email)
+                </div>
+            </div>
+
+            <div class="form-group col-12 mx-2">
+                <div>
+                    @Html.TextBoxFor(m => m.Password, new { placeholder = "Password", @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Password)
+                </div>
+            </div>
+
+            <div class="form-group col-12 mx-2">
+                <div>
+                    @Html.TextBoxFor(m => m.ConfirmPassword, new { placeholder = "Confirm Password", @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.ConfirmPassword)
+                </div>
+            </div>
+
+            <br />
+            <div class="form-group col-12 mx-2">
+                <button type="submit" class="btn btn-info btn-block" style="font-size: 25px;">Sign Up</button>
+            </div>
+
+            <hr class="text-center text-info w-100 my-3" style="height: 5px;" />
+
+            <div class="text-center form-group col-12 mx-2">
+                <a asp-controller="Account" asp-action="Login" class="btn btn-outline-success btn-block">Sign In</a>
+            </div>
+        </div>
+    </form>
+</div>

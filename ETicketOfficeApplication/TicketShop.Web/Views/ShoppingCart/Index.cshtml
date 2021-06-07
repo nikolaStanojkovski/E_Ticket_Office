@@ -1,0 +1,85 @@
+﻿@using Microsoft.Extensions.Options
+@inject IOptions<TicketShop.Domain.DTO.StripeSettingsDTO> Stripe
+@model TicketShop.Domain.DTO.ShoppingCartDto
+
+<h3 class="display-4 text-center my-4">Shopping Cart</h3>
+<br />
+
+<div class="container">
+    <div class="row">
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Theater Name</th>
+                    <th scope="col">Movie Name</th>
+                    <th scope="col">Ticket Price</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Ticket Type</th>
+                    <th scope="col" class="text-right">Total price (EUR)</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.Tickets.Count; i++)
+                {
+                    var item = Model.Tickets[i];
+
+                    <tr>
+                        <th scope="row">@(i+1)</th>
+                        <td>@item.Ticket.TheaterName</td>
+                        <td>@item.Ticket.MovieName</td>
+                        <td>@item.Ticket.Price</td>
+                        <td>@item.Quantity</td>
+                        <td>@item.TicketType</td>
+                        <td class="text-right">@(item.Ticket.Price * item.Quantity) €</td>
+                        <td class="text-center">
+                            <a asp-controller="ShoppingCart" asp-route-ticketId="@item.Ticket.Id"
+                               asp-action="Delete" class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th scope="col">Total Price:</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col" class="text-right">@Model.TotalPrice EUR</th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+
+
+    <div class="row">
+
+        <div class="col-9">
+
+        </div>
+        <div class="col-3 pl-2 text-right justify-content-end">
+            @if (Model.TotalPrice != 0)
+            {
+                <form asp-controller="ShoppingCart" asp-action="PayOrder" method="post">
+                    <article>
+                        <a class="text-right">
+                            <script src="https://checkout.stripe.com/checkout.js"
+                                    class="stripe-button"
+                                    data-key="@Stripe.Value.PublishableKey"
+                                    data-locale="de"
+                                    data-description="EShop Application Payment"
+                                    data-amount="(@Model.TotalPrice * 100.0)"
+                                    data-label="Pay @Model.TotalPrice €">
+                            </script>
+                        </a>
+                    </article>
+                </form>
+            }
+        </div>
+    </div>
+
+</div>

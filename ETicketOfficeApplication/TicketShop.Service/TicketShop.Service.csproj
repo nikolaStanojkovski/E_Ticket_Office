@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="MailKit" Version="2.11.1" />
+		<PackageReference Include="NLog.Web.AspNetCore" Version="4.11.0" />
+	</ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TicketShop.Domain\TicketShop.Domain.csproj" />
+    <ProjectReference Include="..\TicketShop.Repository\TicketShop.Repository.csproj" />
+  </ItemGroup>
+
+</Project>
