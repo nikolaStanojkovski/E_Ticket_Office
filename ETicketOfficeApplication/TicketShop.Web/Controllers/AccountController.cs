@@ -22,6 +22,7 @@ namespace TicketShop.Web.Controllers
         private readonly UserManager<EShopUser> userManager;
         private readonly SignInManager<EShopUser> signInManager;
         private readonly IUserRepository userRepository;
+        private readonly List<string> _roles = new List<string>() { "Administrator", "User" };
 
         public AccountController(UserManager<EShopUser> _userManager,
             SignInManager<EShopUser> _signInManager,
@@ -111,15 +112,9 @@ namespace TicketShop.Web.Controllers
         [Authorize(Roles = "Administrator")]
         public IActionResult AddUserToRole()
         {
-            List<string> roles = new List<string>()
-            {
-                "Administrator",
-                "User"
-            };
-
             AddUserToRoleDTO model = new AddUserToRoleDTO
             {
-                Roles = roles,
+                Roles = _roles,
                 Users = userRepository.GetAllMails(),
             };
 
@@ -131,9 +126,11 @@ namespace TicketShop.Web.Controllers
         public async Task<IActionResult> AddUserToRole([Bind("UserMail,Role")] AddUserToRoleDTO model)
         {
             var user = await userManager.FindByEmailAsync(model.UserMail);
+
+            await userManager.RemoveFromRolesAsync(user, _roles);
             await userManager.AddToRoleAsync(user, model.Role);
 
-            return RedirectToAction("Index", "Tickets");
+            return RedirectToAction("Index", "Home");
         }
 
         [Authorize(Roles = "Administrator")]

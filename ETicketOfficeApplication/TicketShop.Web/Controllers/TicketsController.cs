@@ -156,7 +156,6 @@ namespace TicketShop.Web.Controllers
 
                 if (result)
                     return RedirectToAction("Index", "Tickets");
-
             }
 
             return View(model);
@@ -179,32 +178,13 @@ namespace TicketShop.Web.Controllers
             if (filteredTickets.Count == 0)
                 return RedirectToAction("Index", "Tickets", new { error = "There are no tickets with the specified genre" });
 
-            using (var workbook = new XLWorkbook())
-            {
-                IXLWorksheet worksheet = workbook.Worksheets.Add("Tickets_" + genre.ToString());
+            var workbook = WriteToCSV(filteredTickets);
 
-                worksheet.Cell(1, 1).Value = "Ticket ID";
-                worksheet.Cell(1, 2).Value = "Theater Name";
-                worksheet.Cell(1, 3).Value = "Movie Name";
-                worksheet.Cell(1, 4).Value = "Price (EUR)";
-                worksheet.Cell(1, 5).Value = "Date";
+            var stream = new MemoryStream();
+            workbook.SaveAs(stream);
+            var content = stream.ToArray();
 
-                for (int i = 1; i <= filteredTickets.Count; i++)
-                {
-                    var item = filteredTickets[i - 1];
-                    worksheet.Cell(i + 1, 1).Value = item.Id.ToString();
-                    worksheet.Cell(i + 1, 2).Value = item.TheaterName;
-                    worksheet.Cell(i + 1, 3).Value = item.MovieName;
-                    worksheet.Cell(i + 1, 4).Value = item.Price.ToString();
-                    worksheet.Cell(i + 1, 5).Value = item.Date.ToString();
-                }
-
-                var stream = new MemoryStream();
-                workbook.SaveAs(stream);
-                var content = stream.ToArray();
-
-                return File(content, contentType, fileName);
-            }
+            return File(content, contentType, fileName);
         }
 
         [Authorize(Roles = "Administrator")]
@@ -219,32 +199,37 @@ namespace TicketShop.Web.Controllers
             if (filteredTickets.Count == 0)
                 return RedirectToAction("Index", "Tickets", new { error = "There are no tickets with the specified genre" });
 
-            using (var workbook = new XLWorkbook())
+            var workbook = WriteToCSV(filteredTickets);
+
+            var stream = new MemoryStream();
+            workbook.SaveAs(stream);
+            var content = stream.ToArray();
+
+            return File(content, contentType, fileName);
+        }
+
+        private XLWorkbook WriteToCSV(List<Ticket> filteredTickets)
+        {
+            var workbook = new XLWorkbook();
+            IXLWorksheet worksheet = workbook.Worksheets.Add("Tickets_All");
+
+            worksheet.Cell(1, 1).Value = "Ticket ID";
+            worksheet.Cell(1, 2).Value = "Theater Name";
+            worksheet.Cell(1, 3).Value = "Movie Name";
+            worksheet.Cell(1, 4).Value = "Date";
+            worksheet.Cell(1, 5).Value = "Price (EUR)";
+
+            for (int i = 1; i <= filteredTickets.Count; i++)
             {
-                IXLWorksheet worksheet = workbook.Worksheets.Add("Tickets_All");
-
-                worksheet.Cell(1, 1).Value = "Ticket ID";
-                worksheet.Cell(1, 2).Value = "Theater Name";
-                worksheet.Cell(1, 3).Value = "Movie Name";
-                worksheet.Cell(1, 4).Value = "Price (EUR)";
-                worksheet.Cell(1, 5).Value = "Date";
-
-                for (int i = 1; i <= filteredTickets.Count; i++)
-                {
-                    var item = filteredTickets[i - 1];
-                    worksheet.Cell(i + 1, 1).Value = item.Id.ToString();
-                    worksheet.Cell(i + 1, 2).Value = item.TheaterName;
-                    worksheet.Cell(i + 1, 3).Value = item.MovieName;
-                    worksheet.Cell(i + 1, 4).Value = item.Price.ToString();
-                    worksheet.Cell(i + 1, 5).Value = item.Date.ToString();
-                }
-
-                var stream = new MemoryStream();
-                workbook.SaveAs(stream);
-                var content = stream.ToArray();
-
-                return File(content, contentType, fileName);
+                var item = filteredTickets[i - 1];
+                worksheet.Cell(i + 1, 1).Value = item.Id.ToString();
+                worksheet.Cell(i + 1, 2).Value = item.TheaterName;
+                worksheet.Cell(i + 1, 3).Value = item.MovieName;
+                worksheet.Cell(i + 1, 4).Value = item.Date.ToString();
+                worksheet.Cell(i + 1, 5).Value = item.Price.ToString();
             }
+
+            return workbook;
         }
 
     }
