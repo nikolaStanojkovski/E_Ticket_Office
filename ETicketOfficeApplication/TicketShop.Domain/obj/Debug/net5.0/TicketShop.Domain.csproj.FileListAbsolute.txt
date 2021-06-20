@@ -9,3 +9,4 @@ C:\Users\Nick\Documents\GitHub\E_Ticket_Office\ETicketOfficeApplication\TicketSh
 C:\Users\Nick\Documents\GitHub\E_Ticket_Office\ETicketOfficeApplication\TicketShop.Domain\obj\Debug\net5.0\TicketShop.Domain.dll
 C:\Users\Nick\Documents\GitHub\E_Ticket_Office\ETicketOfficeApplication\TicketShop.Domain\obj\Debug\net5.0\ref\TicketShop.Domain.dll
 C:\Users\Nick\Documents\GitHub\E_Ticket_Office\ETicketOfficeApplication\TicketShop.Domain\obj\Debug\net5.0\TicketShop.Domain.pdb
+C:\Users\Nick\Documents\GitHub\E_Ticket_Office\ETicketOfficeApplication\TicketShop.Domain\obj\Debug\net5.0\TicketShop.Domain.csprojAssemblyReference.cache

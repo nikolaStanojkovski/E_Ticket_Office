@@ -44,7 +44,7 @@
     </dl>
 </div>
 <div>
-    @if (User.Identity.IsAuthenticated)
+    @if (User.IsInRole("Administrator"))
     {
         <a class="btn btn-outline-info mx-2" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
     }

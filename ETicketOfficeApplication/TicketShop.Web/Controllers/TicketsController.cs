@@ -61,6 +61,7 @@ namespace TicketShop.Web.Controllers
         }
 
         // GET: Tickets/Details/5
+        [AllowAnonymous]
         public IActionResult Details(Guid? id)
         {
             if (id == null)
@@ -145,14 +146,18 @@ namespace TicketShop.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddTicketToCart([Bind("TicketId", "TicketType", "Quantity")] AddToShoppingCartDto model)
+        public IActionResult AddTicketToCart([Bind("MovieName", "MovieDate", "MovieGenre", "TicketId", "TicketType", "Quantity")] AddToShoppingCartDto model)
         {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if(ModelState.IsValid)
+            {
+                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            var result = this._ticketService.AddTicketToShoppingCart(userId, model);
+                var result = this._ticketService.AddTicketToShoppingCart(userId, model);
 
-            if (result)
-                return RedirectToAction("Index", "Tickets");
+                if (result)
+                    return RedirectToAction("Index", "Tickets");
+
+            }
 
             return View(model);
         }
@@ -164,7 +169,7 @@ namespace TicketShop.Web.Controllers
 
         [Authorize(Roles = "Administrator")]
         [HttpPost]
-        public IActionResult ExportTickets([Bind("genre")] Genre genre)
+        public IActionResult ExportTicketsByGenre([Bind("genre")] Genre genre)
         {
             List<Ticket> filteredTickets = _ticketService.FilterTicketsByGenre(genre);
 
@@ -177,6 +182,46 @@ namespace TicketShop.Web.Controllers
             using (var workbook = new XLWorkbook())
             {
                 IXLWorksheet worksheet = workbook.Worksheets.Add("Tickets_" + genre.ToString());
+
+                worksheet.Cell(1, 1).Value = "Ticket ID";
+                worksheet.Cell(1, 2).Value = "Theater Name";
+                worksheet.Cell(1, 3).Value = "Movie Name";
+                worksheet.Cell(1, 4).Value = "Price (EUR)";
+                worksheet.Cell(1, 5).Value = "Date";
+
+                for (int i = 1; i <= filteredTickets.Count; i++)
+                {
+                    var item = filteredTickets[i - 1];
+                    worksheet.Cell(i + 1, 1).Value = item.Id.ToString();
+                    worksheet.Cell(i + 1, 2).Value = item.TheaterName;
+                    worksheet.Cell(i + 1, 3).Value = item.MovieName;
+                    worksheet.Cell(i + 1, 4).Value = item.Price.ToString();
+                    worksheet.Cell(i + 1, 5).Value = item.Date.ToString();
+                }
+
+                var stream = new MemoryStream();
+                workbook.SaveAs(stream);
+                var content = stream.ToArray();
+
+                return File(content, contentType, fileName);
+            }
+        }
+
+        [Authorize(Roles = "Administrator")]
+        [HttpPost]
+        public IActionResult ExportAllTickets()
+        {
+            List<Ticket> filteredTickets = _ticketService.GetAllTickets();
+
+            var fileName = "Tickets_All.xlsx";
+            var contentType = "application/vnd.ms-excel";
+
+            if (filteredTickets.Count == 0)
+                return RedirectToAction("Index", "Tickets", new { error = "There are no tickets with the specified genre" });
+
+            using (var workbook = new XLWorkbook())
+            {
+                IXLWorksheet worksheet = workbook.Worksheets.Add("Tickets_All");
 
                 worksheet.Cell(1, 1).Value = "Ticket ID";
                 worksheet.Cell(1, 2).Value = "Theater Name";

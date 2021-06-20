@@ -15,21 +15,21 @@
             <input type="hidden" asp-for="TicketId" />
 
             <div class="form-group">
-                <label asp-for="Ticket.MovieName"></label>
-                <input disabled asp-for="Ticket.MovieName" class="form-control" />
+                <label asp-for="@Model.Ticket.MovieName"></label>
+                <input disabled asp-for="@Model.Ticket.MovieName" class="form-control" />
             </div>
 
             <div class="form-group">
-                <label asp-for="Ticket.Date"></label>
-                <input disabled asp-for="Ticket.Date" class="form-control" />
+                <label asp-for="@Model.Ticket.Date"></label>
+                <input disabled asp-for="@Model.Ticket.Date" class="form-control" />
             </div>
 
             <div class="form-group">
-                <label asp-for="Ticket.Genre"></label>
-                <input disabled asp-for="Ticket.Genre" class="form-control" />
+                <label asp-for="@Model.Ticket.Genre"></label>
+                <input disabled asp-for="@Model.Ticket.Genre" class="form-control" />
             </div>
 
-            <hr class="text-center text-info w-100 my-2"/>
+            <hr class="text-center text-info w-100 my-2" />
 
             <div class="form-group">
                 <label asp-for="Quantity"></label>
@@ -43,7 +43,8 @@
             </div>
 
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Save" class="btn btn-primary" /> &nbsp;
+                <a asp-action="Index" class="btn btn-outline-info">Back to List</a>
             </div>
         </form>
     </div>
