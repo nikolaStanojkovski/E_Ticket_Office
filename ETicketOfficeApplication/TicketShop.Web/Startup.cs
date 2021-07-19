@@ -27,13 +27,16 @@ namespace TicketShop.Web
     public class Startup
     {
         public EmailSettings _emailSettings;
+        private string _contentRootPath = "";
 
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, Microsoft.AspNetCore.Hosting.IHostingEnvironment env)
         {
             this.Configuration = configuration;
 
             this._emailSettings = new EmailSettings();
             Configuration.GetSection("EmailSettings").Bind(_emailSettings);
+
+            _contentRootPath = env.ContentRootPath;
         }
 
         public IConfiguration Configuration { get; }
@@ -41,9 +44,16 @@ namespace TicketShop.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            string conn = Configuration.GetConnectionString("DefaultConnection");
+            if (conn.Contains("%CONTENTROOTPATH%"))
+            {
+                conn = conn.Replace("%CONTENTROOTPATH%", _contentRootPath);
+            }
+            // Add framework services.
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlServer(conn));  //use conn
+
+            services.AddDatabaseDeveloperPageExceptionFilter();
 
             services.AddDefaultIdentity<EShopUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddRoles<IdentityRole>()
