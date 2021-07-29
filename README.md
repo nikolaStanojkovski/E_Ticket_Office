@@ -8,7 +8,7 @@ Online shop application for ordering and managing cinema tickets developed with 
 The application uses <b>SQL Server</b> as a database server, <b>Onion</b> architecture (<b>Domain, Repository, Service, Web</b> layers) as a main architectural pattern, and, <b>C#</b> as a main programming language. <br/> <br/>
 The application has the following functionalities:
 <br/>
-- User Registration / Login with full authorization mechanism through the whole application.
+- User Registration / Login with full authorization mechanism throughout the whole application.
 - User Management (Adding users to roles)
 - <i>CRUD</i> Operations for tickets
 - Review of all available tickets
